@@ -34,7 +34,7 @@ def group_by_period(dataframe:pd.DataFrame) -> pd.DataFrame:
     dataframe = dataframe[dataframe["event_date"] <= pd.to_datetime("2025-11-08")]
     dataframe = pd.merge_asof(dataframe, period_end_dates, left_on="event_date", right_on="End Date", direction="forward")
 
-    grouping = dataframe.groupby(["End Date", "year", "annual_period", "PREC_ID"], as_index=False)["smis_reference"].count()
+    grouping = dataframe.groupby(["End Date", "year", "annual_period", "Period", "PREC_ID"], as_index=False)["smis_reference"].count()
 
     grouping.to_csv("group.csv")
 
